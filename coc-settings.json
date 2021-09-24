@@ -7,6 +7,18 @@
         "snippets",
         "$HOME/.config/nvim/snippets/"
     ],
+    "bash": {
+        "command": "bash-language-server",
+        "args": [
+            "start"
+        ],
+        "filetypes": [
+            "sh"
+        ],
+        "ignoredRootPaths": [
+            "~"
+        ]
+    },
     "suggest.completionItemKindLabels": {
         "class": "\uf0e8",
         "color": "\ue22b",
