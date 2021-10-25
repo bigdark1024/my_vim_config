@@ -244,7 +244,10 @@ call plug#end()
                                       \ 'coc-snippets',
                                       \ 'coc-actions',
                                       \ 'coc-json',
-                                      \ 'coc-vimlsp'
+                                      \ 'coc-vimlsp',
+                                      \ 'coc-ccls',
+                                      \ 'coc-clangd',
+                                      \ 'coc-cmake'
                                       \]
 
         " 报错跳转
