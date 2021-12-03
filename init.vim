@@ -162,9 +162,44 @@ call plug#begin('~/.config/nvim/plugged')
 
     " tagbar
     Plug 'majutsushi/tagbar'
+
+    " floaterm
+    Plug 'voldikss/vim-floaterm'
+
+    " 缩进线
+    Plug 'Yggdroot/indentLine'
 call plug#end()
 
 " 插件配置
+    " indent config
+    " 使用空格扩展tab
+    set expandtab
+    " tab大小为2
+    set ts=2 sw=2 et
+    " vim启动时启用vim_indent_guides
+    let g:indent_guides_enable_on_vim_startup = 1
+    " 开始画缩进线的缩进等级
+    let g:indent_guides_start_level = 1
+    " 缩进线宽度
+    let g:indent_guides_guide_size = 1
+    " 配色方案
+    colorscheme desert
+    " 设定基数列和偶数列的缩进线颜色
+    let g:indent_guides_auto_colors = 0
+    autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=white ctermbg=white
+    autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=red ctermbg=red
+
+    " floaterm
+    let g:floaterm_keymap_new    = '<F7>'
+    let g:floaterm_keymap_prev   = '<F8>'
+    let g:floaterm_keymap_next   = '<F9>'
+    let g:floaterm_keymap_toggle = '<F12>'
+    let g:floaterm_keymap_new = '<Leader>ft'
+    " Set floaterm window's background to black
+    hi Floaterm guibg=black
+    " Set floating window border line color to cyan, and background to orange
+    hi FloatermBorder guibg=orange guifg=cyan
+
     " tagbar
         let g:tagbar_width=30
         nnoremap <silent> <F3> :TagbarToggle<CR>
@@ -245,9 +280,9 @@ call plug#end()
                                       \ 'coc-actions',
                                       \ 'coc-json',
                                       \ 'coc-vimlsp',
-                                      \ 'coc-ccls',
                                       \ 'coc-clangd',
-                                      \ 'coc-cmake'
+                                      \ 'coc-cmake',
+                                      \ 'coc-python'
                                       \]
 
         " 报错跳转
