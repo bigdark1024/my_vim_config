@@ -168,6 +168,8 @@ call plug#begin('~/.config/nvim/plugged')
 
     " 缩进线
     Plug 'Yggdroot/indentLine'
+    " Doxygen
+    Plug 'mrtazz/DoxygenToolkit.vim'
 call plug#end()
 
 " 插件配置
@@ -219,18 +221,18 @@ call plug#end()
         let g:airline_powerline_fonts = 0
         let g:airline_left_sep = ''
         let g:airline_right_sep = ''
-        " 缓冲区移动键
-            nmap <silent> <leader>1         <Plug>AirlineSelectTab1
-            nmap <silent> <leader>2         <Plug>AirlineSelectTab2
-            nmap <silent> <leader>3         <Plug>AirlineSelectTab3
-            nmap <silent> <leader>4         <Plug>AirlineSelectTab4
-            nmap <silent> <leader>5         <Plug>AirlineSelectTab5
-            nmap <silent> <leader>6         <Plug>AirlineSelectTab6
-            nmap <silent> <leader>7         <Plug>AirlineSelectTab7
-            nmap <silent> <leader>8         <Plug>AirlineSelectTab8
-            nmap <silent> <leader>9         <Plug>AirlineSelectTab9
-            nmap <silent> <leader>-         <Plug>AirlineSelectPrevTab
-            nmap <silent> <leader>=         <Plug>AirlineSelectNextTab
+    " 缓冲区移动键
+        nmap <silent> <leader>1         <Plug>AirlineSelectTab1
+        nmap <silent> <leader>2         <Plug>AirlineSelectTab2
+        nmap <silent> <leader>3         <Plug>AirlineSelectTab3
+        nmap <silent> <leader>4         <Plug>AirlineSelectTab4
+        nmap <silent> <leader>5         <Plug>AirlineSelectTab5
+        nmap <silent> <leader>6         <Plug>AirlineSelectTab6
+        nmap <silent> <leader>7         <Plug>AirlineSelectTab7
+        nmap <silent> <leader>8         <Plug>AirlineSelectTab8
+        nmap <silent> <leader>9         <Plug>AirlineSelectTab9
+        nmap <silent> <leader>-         <Plug>AirlineSelectPrevTab
+        nmap <silent> <leader>=         <Plug>AirlineSelectNextTab
 
     " dracula
         colorscheme dracula
@@ -367,3 +369,11 @@ call plug#end()
         " 重载;和,
         map ; <Plug>(clever-f-repeat-forward)
         map , <Plug>(clever-f-repeat-back)
+    " DoxygenToolkit
+        let g:DoxygenToolkit_briefTag_pre="@Synopsis  "
+        let g:DoxygenToolkit_paramTag_pre="@Param "
+        let g:DoxygenToolkit_returnTag="@Returns   "
+        let g:DoxygenToolkit_blockHeader="-------------------------------"
+        let g:DoxygenToolkit_blockFooter="---------------------------------"
+        let g:DoxygenToolkit_authorName="BigDark"
+        let g:DoxygenToolkit_licenseTag="My own license"
