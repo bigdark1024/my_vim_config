@@ -118,7 +118,8 @@
 call plug#begin('~/.config/nvim/plugged')
     " 外观
     Plug 'vim-airline/vim-airline'
-    Plug 'dracula/vim'
+    " 主题
+    Plug 'joshdick/onedark.vim'
     " 高亮当前光标下的词
     Plug 'RRethy/vim-illuminate'
 
@@ -168,6 +169,7 @@ call plug#begin('~/.config/nvim/plugged')
 
     " 缩进线
     Plug 'Yggdroot/indentLine'
+
     " Doxygen
     Plug 'mrtazz/DoxygenToolkit.vim'
 call plug#end()
@@ -185,7 +187,11 @@ call plug#end()
     " 缩进线宽度
     let g:indent_guides_guide_size = 1
     " 配色方案
-    colorscheme desert
+    colorscheme onedark
+    let g:lightline = {
+    \ 'colorscheme': 'onedark'
+    \}
+
     " 设定基数列和偶数列的缩进线颜色
     let g:indent_guides_auto_colors = 0
     autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=white ctermbg=white
@@ -233,10 +239,6 @@ call plug#end()
         nmap <silent> <leader>9         <Plug>AirlineSelectTab9
         nmap <silent> <leader>-         <Plug>AirlineSelectPrevTab
         nmap <silent> <leader>=         <Plug>AirlineSelectNextTab
-
-    " dracula
-        colorscheme dracula
-        set termguicolors
 
         " 去除背景高亮
         highlight Normal guibg=NONE ctermbg=None
