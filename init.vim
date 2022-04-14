@@ -34,6 +34,7 @@
     set autoread                        " 文件变化之后自动重读
     set wildmenu                        " 启用命令行模式下自动补全
     set noautochdir                     " 进入Vim不切换到文件所在目录
+    set mouse=a                         " 支持鼠标
 
     " 打开文件时光标返回上次离开的位置
     autocmd BufReadPost * execute "normal g'\""
