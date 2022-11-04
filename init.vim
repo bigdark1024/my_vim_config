@@ -301,7 +301,9 @@ let g:coc_global_extensions = [
       \ 'coc-clangd',
       \ 'coc-cmake',
       \ 'coc-java',
-      \ 'coc-python'
+      \ 'coc-python',
+      \ 'coc-highlight',
+      \ 'coc-syntax'
       \]
 
 " 报错跳转
