@@ -14,6 +14,7 @@ sudo apt install ranger
 sudo add-apt-repository ppa:lazygit-team/release
 sudo apt-get update
 sudo apt-get install lazygit
+sudo apt install -y ripgrep
 ```
 
 # INSTALL
@@ -25,3 +26,14 @@ git clone https://github.com/bigdark1024/my_vim_config.git ~/.config/nvim
 
 Execute PlugInstall to install the plugins.
 
+
+## FAQ
+
+- No "python3" provider found. Run ":checkhealth provider"
+
+> https://neovim.io/doc/user/provider.html
+
+```text
+python3 -m pip install --user --upgrade pynvim
+pip3 install --user --upgrade neovim
+```

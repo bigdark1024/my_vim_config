@@ -182,6 +182,20 @@ Plug 'morhetz/gruvbox'
 
 " honza/vim-snippets
 Plug 'honza/vim-snippets'
+
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh'  }
+
+
+if has('nvim')
+  Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/denite.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
+Plug 'nvim-tree/nvim-web-devicons'
+
 call plug#end()
 
 " 插件配置
@@ -398,3 +412,85 @@ let g:DoxygenToolkit_authorName="BigDark"
 let g:DoxygenToolkit_licenseTag="My own license"
 imap cm   <esc>:Dox<CR>
 map cm   :Dox<CR>
+
+"leaderF
+let g:Lf_ShortcutF = '<c-p>'
+nmap <unique> <leader>fr <Plug>LeaderfRgPrompt
+nmap <unique> <leader>fra <Plug>LeaderfRgCwordLiteralNoBoundary
+nmap <unique> <leader>frb <Plug>LeaderfRgCwordLiteralBoundary
+nmap <unique> <leader>frc <Plug>LeaderfRgCwordRegexNoBoundary
+nmap <unique> <leader>frd <Plug>LeaderfRgCwordRegexBoundary
+vmap <unique> <leader>fra <Plug>LeaderfRgVisualLiteralNoBoundary
+vmap <unique> <leader>frb <Plug>LeaderfRgVisualLiteralBoundary
+vmap <unique> <leader>frc <Plug>LeaderfRgVisualRegexNoBoundary
+vmap <unique> <leader>frd <Plug>LeaderfRgVisualRegexBoundary
+
+let g:Lf_WorkingDirectoryMode = 'c'
+let g:Lf_UseVersionControlTool = 0
+let g:Lf_DefaultExternalTool = "rg"
+let g:Lf_ExternalCommand = 'rg --files "%s"'   
+
+let g:Lf_WildIgnore={ 'file':['*.lib', '*.a', '*.o', '*.d', '*.so', ],'dir':['tmp', '.git', 'api', 'attachments', 'images', 'img', 'download',  ]}
+
+
+" Denite use floating
+" Define mappings
+autocmd FileType denite call s:denite_my_settings()
+function! s:denite_my_settings() abort
+  nnoremap <silent><buffer><expr> <CR>
+  \ denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> d
+  \ denite#do_map('do_action', 'delete')
+  nnoremap <silent><buffer><expr> p
+  \ denite#do_map('do_action', 'preview')
+  nnoremap <silent><buffer><expr> q
+  \ denite#do_map('quit')
+  nnoremap <silent><buffer><expr> i
+  \ denite#do_map('open_filter_buffer')
+  nnoremap <silent><buffer><expr> <Space>
+  \ denite#do_map('toggle_select').'j'
+endfunction
+
+let s:denite_win_width_percent = 0.8
+let s:denite_win_height_percent = 0.7
+let s:denite_default_options = {
+    \ 'split': 'floating',
+    \ 'winwidth': float2nr(&columns * s:denite_win_width_percent),
+    \ 'wincol': float2nr((&columns - (&columns * s:denite_win_width_percent)) / 2),
+    \ 'winheight': float2nr(&lines * s:denite_win_height_percent),
+    \ 'winrow': float2nr((&lines - (&lines * s:denite_win_height_percent)) / 2),
+    \ 'highlight_filter_background': 'DeniteFilter',
+    \ 'prompt': 'Œª ',
+    \ }
+let s:denite_option_array = []
+for [key, value] in items(s:denite_default_options)
+  call add(s:denite_option_array, '-'.key.'='.value)
+endfor
+call denite#custom#option('default', s:denite_default_options)
+
+" Ag command on grep source
+call denite#custom#var('grep', 'command', ['ag'])
+call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'pattern_opt', [])
+call denite#custom#var('grep', 'separator', ['--'])
+call denite#custom#var('grep', 'final_opts', [])
+
+" grep
+command! -nargs=? Dgrep call s:Dgrep(<f-args>)
+function s:Dgrep(...)
+  if a:0 > 0
+    execute(':Denite -buffer-name=grep-buffer-denite grep -path='.a:1)
+  else
+    let l:path = expand('%:p:h')
+    execute(':Denite -buffer-name=grep-buffer-denite -no-empty '.join(s:denite_option_array, ' ').' grep -path='.l:path)
+  endif
+endfunction
+
+" show Denite grep results
+command! Dresume execute(':Denite -resume -buffer-name=grep-buffer-denite '.join(s:denite_option_array, ' ').'')
+
+nnoremap <silent> ;r :<C-u>Dgrep<CR>
+
+
+" -------
