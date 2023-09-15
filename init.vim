@@ -194,7 +194,9 @@ else
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
-Plug 'nvim-tree/nvim-web-devicons'
+" Vim Script
+Plug 'nvim-lua/plenary.nvim'
+Plug 'folke/todo-comments.nvim'
 
 call plug#end()
 
