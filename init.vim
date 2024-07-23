@@ -200,10 +200,33 @@ Plug 'folke/todo-comments.nvim'
 
 call plug#end()
 
-" 插件配置
-" indent config
-" 使用空格扩展tab
+" 高亮显示当前行
+set cursorline
+" 设置各种缩进
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set autoindent
+set smartindent
+set cindent
+" tab转换为空格
 set expandtab
+
+"设置跳出自动补全的括号
+func SkipPair()  
+    if getline('.')[col('.') - 1] == ')' || getline('.')[col('.') - 1] == ']' || getline('.')[col('.') - 1] == '"' || getline('.')[col('.') - 1] == "'" || getline('.')[col('.') - 1] == '}'  
+        return "\<ESC>la"  
+    else  
+        return "\t"  
+    endif  
+endfunc  
+" 将tab键绑定为跳出括号  
+inoremap <TAB> <c-r>=SkipPair()<CR>
+
+" 缩进
+nmap <TAB> V>
+nmap <s-TAB> V<
+
 " tab大小为2
 set ts=2 sw=2 et
 " vim启动时启用vim_indent_guides
@@ -494,5 +517,14 @@ command! Dresume execute(':Denite -resume -buffer-name=grep-buffer-denite '.join
 
 nnoremap <silent> ;r :<C-u>Dgrep<CR>
 
-
 " -------
+
+" =========================COC 配置==================================
+colors ron
+" 提示框的颜色和选中的颜色
+hi Pmenu ctermfg=0 ctermbg=7
+hi PmenuSel ctermfg=0 ctermbg=11
+"hi CocFloating ctermfg=black ctermbg=240
+hi cComment ctermfg=Grey
+hi CocErrorFloat ctermfg=0
+" =========================COC 配置==================================
